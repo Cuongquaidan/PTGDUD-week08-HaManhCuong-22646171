@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import DataTable from "datatables.net-react";
 import DT from "datatables.net-dt";
-
+import { CgFileDocument } from "react-icons/cg";
 export const columns = [
     "CUSTOMER NAME",
     "COMPANY",
@@ -15,7 +15,9 @@ function DashboardAdmin() {
     const [dataTable, setDataTable] = useState([]);
     const [dataTableNoID, setDataTableNoID] = useState([]);
     const [showModal, setShowModal] = useState(false);
+    const [showAddModal, setShowAddModal] = useState(false);
     const [editedRowData, setEditedRowData] = useState(null);
+
     const fetchData = async () => {
         const response = await fetch("http://localhost:3000/table");
         if (!response.ok) {
@@ -36,6 +38,21 @@ function DashboardAdmin() {
         setEditedRowData(null);
         fetchData();
         setShowModal(false);
+    };
+    const handleAdd = () => {
+        fetch("http://localhost:3000/table", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify({
+                row: editedRowData.row,
+                id: Math.floor(Math.random() * 10000),
+            }),
+        });
+        setEditedRowData(null);
+        fetchData();
+        setShowAddModal(false);
     };
     useEffect(() => {
         fetchData();
@@ -88,6 +105,24 @@ function DashboardAdmin() {
     }, [dataTable]);
     return (
         <div className="p-6 w-full">
+            <div className="flex justify-between items-center mb-4 border-b border-primary pb-4">
+                <div className="flex gap-2 items-center">
+                    <CgFileDocument
+                        size={30}
+                        className="text-primary "
+                    ></CgFileDocument>
+                    <h2 className="text-2xl font-bold ">Detailed report</h2>
+                </div>
+                <button
+                    className="bg-primary font-bold text-white px-4 py-1 rounded cursor-pointer"
+                    onClick={() => {
+                        setEditedRowData({ row: ["", "", "", "", ""] });
+                        setShowAddModal(true);
+                    }}
+                >
+                    Add customer
+                </button>
+            </div>
             <DataTable data={dataTableNoID} className="w-full">
                 <thead>
                     <tr>
@@ -151,7 +186,65 @@ function DashboardAdmin() {
                                 }}
                                 className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1 rounded cursor-pointer"
                             >
-                                Cập nhật
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+            {showAddModal && (
+                <div className="fixed inset-0 z-50  flex items-center justify-center">
+                    <div
+                        className="fixed inset-0 z-40 bg-black/30 w-screen h-screen"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            setShowAddModal(false);
+                        }}
+                    ></div>
+                    <div className="bg-white rounded-lg p-6 w-full max-w-md shadow-lg relative z-50">
+                        <button
+                            className="absolute top-2 right-2 text-gray-500  rounded-full bg-primary/80 flex items-center justify-center text-white font-bold h-10 w-10 text-lg cursor-pointer"
+                            onClick={() => setShowAddModal(false)}
+                        >
+                            <p>x</p>
+                        </button>
+
+                        <h2 className="text-xl font-semibold mb-4 text-center">
+                            Add customer
+                        </h2>
+
+                        <div className="space-y-3">
+                            {editedRowData.row.map((value, idx) => (
+                                <div key={idx}>
+                                    <label className="block text-sm font-medium text-gray-600">
+                                        {columns[idx]}
+                                    </label>
+                                    <input
+                                        value={value}
+                                        onChange={(e) => {
+                                            const newRow = [
+                                                ...editedRowData.row,
+                                            ];
+                                            newRow[idx] = e.target.value;
+                                            setEditedRowData({
+                                                ...editedRowData,
+                                                row: newRow,
+                                            });
+                                        }}
+                                        className="w-full border border-gray-300 px-3 py-1 rounded"
+                                    />
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="mt-6 flex justify-end space-x-2 ">
+                            <button
+                                onClick={() => {
+                                    handleAdd();
+                                }}
+                                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1 rounded cursor-pointer"
+                            >
+                                Save
                             </button>
                         </div>
                     </div>
