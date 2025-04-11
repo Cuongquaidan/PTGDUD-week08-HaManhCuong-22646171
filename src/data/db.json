@@ -1,39 +1,104 @@
 {
-    "overview": [
-        {
-            "id": 1,
-            "title": "Turnover",
-            "total": 92405,
-            "ratio": 5.39
-        },
-        {
-            "id": 2,
-            "title": "Profit",
-            "total": 32.218,
-            "ratio": 5.39
-        },
-        {
-            "id": 3,
-            "title": "New customer",
-            "total": 298,
-            "ratio": 6.84
-        }
-    ],
-    "table": [
-        ["Nguyen Van A", "ABC Company", "$1000", "2023-10-01", "Completed"],
-        ["Nguyen Van B", "XYZ Company", "$2000", "2023-10-02", "New"],
-        ["Nguyen Van C", "DEF Company", "$1500", "2023-10-03", "In-progress"],
-        ["Nguyen Van D", "GHI Company", "$2500", "2023-10-04", "Completed"],
-        ["Nguyen Van E", "JKL Company", "$3000", "2023-10-05", "Completed"],
-        ["Nguyen Van F", "MNO Company", "$1200", "2023-10-06", "New"],
-        ["Nguyen Van G", "PQR Company", "$1800", "2023-10-07", "In-progress"],
-        ["Nguyen Van H", "STU Company", "$2200", "2023-10-08", "Completed"],
-        ["Nguyen Van I", "VWX Company", "$2800", "2023-10-09", "Completed"],
-        ["Nguyen Van J", "YZA Company", "$3500", "2023-10-10", "New"],
-        ["Nguyen Van K", "BCD Company", "$4000", "2023-10-11", "In-progress"],
-        ["Nguyen Van L", "EFG Company", "$1600", "2023-10-12", "Completed"],
-        ["Nguyen Van M", "HIJ Company", "$2400", "2023-10-13", "Completed"],
-        ["Nguyen Van N", "KLM Company", "$3000", "2023-10-14", "New"],
-        ["Nguyen Van O", "NOP Company", "$1300", "2023-10-15", "In-progress"]
-    ]
+  "overview": [
+    {
+      "id": "1",
+      "title": "Turnover",
+      "total": 92405,
+      "ratio": 5.39
+    },
+    {
+      "id": "2",
+      "title": "Profit",
+      "total": 32.218,
+      "ratio": 5.39
+    },
+    {
+      "id": "3",
+      "title": "New customer",
+      "total": 298,
+      "ratio": 6.84
+    }
+  ],
+  "table": [
+    {
+      "id": "1",
+      "row": [
+        "Nguyen Van AAAA",
+        "ABC Company",
+        "$1000",
+        "2023-10-01",
+        "Completed"
+      ]
+    },
+    {
+      "id": "2",
+      "row": [
+        "Nguyen Van B",
+        "XYZ Company",
+        "$2000",
+        "2023-10-02",
+        "In-progress"
+      ]
+    },
+    {
+      "id": "3",
+      "row": [
+        "Nguyen Van C",
+        "DEF Company",
+        "$1500",
+        "2023-10-03",
+        "Completed"
+      ]
+    },
+    {
+      "id": "4",
+      "row": [
+        "Nguyen Van D",
+        "GHI Company",
+        "$2500",
+        "2023-10-04",
+        "New"
+      ]
+    },
+    {
+      "id": "5",
+      "row": [
+        "Nguyen Van E",
+        "JKL Company",
+        "$3000",
+        "2023-10-05",
+        "Completed"
+      ]
+    },
+    {
+      "id": "6",
+      "row": [
+        "Nguyen Van F",
+        "MNO Company",
+        "$1200",
+        "2023-10-06",
+        "In-progress"
+      ]
+    },
+    {
+      "id": "7",
+      "row": [
+        "Nguyen Van G",
+        "PQR Company",
+        "$1800",
+        "2023-10-07",
+        "Completed"
+      ]
+    },
+    {
+      "id": "8",
+      "row": [
+        "Nguyen Van H",
+        "STU Company",
+        "$2200",
+        "2023-10-08",
+        "New"
+      ]
+    }
+  ]
 }
