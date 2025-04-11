@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "/logo.svg";
 import SidebarImg from "/SidebarImg.svg";
 import { MdOutlineDashboard } from "react-icons/md";
@@ -7,7 +7,7 @@ import { MdOutlinePieChartOutline } from "react-icons/md";
 import { TbUsersGroup } from "react-icons/tb";
 import { LuMessageSquareText } from "react-icons/lu";
 import { LuChevronsLeftRight } from "react-icons/lu";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 const sidebarData = [
     {
         icon: <MdOutlineDashboard size={20} />,
@@ -37,12 +37,15 @@ const sidebarData = [
     {
         icon: <LuChevronsLeftRight size={20} />,
         title: "Integrations",
-        to: "/admin/intergrations",
+        to: "/admin/integrations",
     },
 ];
 function SidebarAdmin() {
-    const location = window.location.pathname;
-
+    const location = useLocation();
+    const [currentPathname, setCurrentPathname] = useState(location.pathname);
+    useEffect(() => {
+        setCurrentPathname(location.pathname);
+    }, [location.pathname]);
     return (
         <div className="p-4 flex flex-col border-r min-h-screen border-neutral-300 items-center gap-2">
             <img src={Logo} alt="" className="w-[106px] h-[36px]" />
@@ -52,7 +55,7 @@ function SidebarAdmin() {
                         to={item.to}
                         key={index}
                         className={`p-2 gap-2 text-md  flex rounded-xl items-center ${
-                            location === item.to
+                            currentPathname === item.to
                                 ? "text-white bg-primary"
                                 : "text-neutral-600"
                         }`}
