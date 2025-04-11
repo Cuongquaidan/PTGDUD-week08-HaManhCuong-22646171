@@ -4,23 +4,18 @@ import DT from "datatables.net-dt";
 
 function DashboardAdmin() {
     DataTable.use(DT);
-    const [dataTable, setDataTable] = useState([
-        ["Nguyen Van A", "ABC Company", "$1000", "2023-10-01", "Completed"],
-        ["Nguyen Van B", "XYZ Company", "$2000", "2023-10-02", "New"],
-        ["Nguyen Van C", "DEF Company", "$1500", "2023-10-03", "In-progress"],
-        ["Nguyen Van D", "GHI Company", "$2500", "2023-10-04", "Completed"],
-        ["Nguyen Van E", "JKL Company", "$3000", "2023-10-05", "Completed"],
-        ["Nguyen Van F", "MNO Company", "$1200", "2023-10-06", "New"],
-        ["Nguyen Van G", "PQR Company", "$1800", "2023-10-07", "In-progress"],
-        ["Nguyen Van H", "STU Company", "$2200", "2023-10-08", "Completed"],
-        ["Nguyen Van I", "VWX Company", "$2800", "2023-10-09", "Completed"],
-        ["Nguyen Van J", "YZA Company", "$3500", "2023-10-10", "New"],
-        ["Nguyen Van K", "BCD Company", "$4000", "2023-10-11", "In-progress"],
-        ["Nguyen Van L", "EFG Company", "$1600", "2023-10-12", "Completed"],
-        ["Nguyen Van M", "HIJ Company", "$2400", "2023-10-13", "Completed"],
-        ["Nguyen Van N", "KLM Company", "$3000", "2023-10-14", "New"],
-        ["Nguyen Van O", "NOP Company", "$1300", "2023-10-15", "In-progress"],
-    ]);
+    const [dataTable, setDataTable] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await fetch("http://localhost:3000/table");
+            if (!response.ok) {
+                throw new Error("Failed to fetch data");
+            }
+            const resjson = await response.json();
+            setDataTable(resjson);
+        };
+        fetchData();
+    }, []);
     useEffect(() => {
         document.querySelectorAll("tbody tr td:last-child").forEach((td) => {
             const status = td.innerText.toLowerCase();
